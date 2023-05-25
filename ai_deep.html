@@ -1,0 +1,67 @@
+<!-- <!DOCTYPE html>
+<html>
+  <body>
+    <h1>this is vijay krishna</h1>
+    <form>
+      <input type="file" id="image-input" name="image">
+      <button type="button" onclick="sendImage()">Submit</button>
+    </form>
+    <p id="result"></p>
+    <script>
+      function sendImage() {
+        const fileInput = document.getElementById("image-input");
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append("image", file);
+        fetch("/predict", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("result").textContent = data.emotion;
+          })
+          .catch((error) => console.error(error));
+      }
+    </script>
+  </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      form{text-align: center;}
+      #result {font-size: 40px; text-align: center; color: blue;}
+      #image-display {max-width: 300px; max-height: 300px; display: block; margin: 0 auto;} 
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center; color: rgb(125, 6, 6)">Facial Emotion Recognition</h1>
+    <form>
+      <input type="file" id="image-input" name="image">
+      <button type="button" onclick="sendImage()">Submit</button>
+    </form>
+    <p id="result"></p>
+    <img id="image-display" src="#" alt="Image preview">
+    <script>
+      function sendImage() {
+        const fileInput = document.getElementById("image-input");
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append("image", file);
+        fetch("/predict", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("result").textContent = data.emotion;
+            document.getElementById("image-display").src = URL.createObjectURL(file);
+          })
+          .catch((error) => console.error(error));
+      }
+    </script>
+  </body>
+</html>
